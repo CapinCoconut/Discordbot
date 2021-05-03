@@ -56,7 +56,13 @@ async def on_message(message):
     if message.content.startswith('!thanks'):
         await message.channel.send(random.choice(replies))
 
-
+# welcomes new user to channel 
+@client.event
+async def on_member_join(member):
+    await member.create_dm()
+    await member.dm_channel.send(
+        f'Hi {member.name}, I am so thrilled you are here!'
+    )
 #  token that represents the bot 
 
 client.run('ODA1NTA1MDc5MzYwMjI1Mjgw.YBb3EA.ejTyLVg6iGI2uNsySxP1XuZ7cWQ')
