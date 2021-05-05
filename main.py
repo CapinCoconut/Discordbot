@@ -2,14 +2,22 @@
 import discord
 import os
 import random
- 
+
 client = discord.Client()
 
 # let's us know the bot is ready to use
-
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print(f'{client.user.name} has connected to Discord!')
+
+#message welcoming new users
+@client.event
+async def on_member_join(member):
+    await member.create_dm()
+    await member.dm_channel.send(
+        f'Hi {member.name}, welcome to my Discord server!'
+    )
+
 
 # variables representing responses 
 apologies = [
@@ -56,13 +64,6 @@ async def on_message(message):
     if message.content.startswith('!thanks'):
         await message.channel.send(random.choice(replies))
 
-# welcomes new user to channel 
-@client.event
-async def on_member_join(member):
-    await member.create_dm()
-    await member.dm_channel.send(
-        f'Hi {member.name}, I am so thrilled you are here!'
-    )
 #  token that represents the bot 
 
 client.run('ODA1NTA1MDc5MzYwMjI1Mjgw.YBb3EA.ejTyLVg6iGI2uNsySxP1XuZ7cWQ')
