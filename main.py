@@ -10,13 +10,16 @@ client = discord.Client()
 async def on_ready():
     print(f'{client.user.name} has connected to Discord!')
 
-#message welcoming new users
+
 @client.event
 async def on_member_join(member):
     await member.create_dm()
     await member.dm_channel.send(
-        f'Hi {member.name}, welcome to my Discord server!'
+        print (f'Hi {member.name}, welcome to my Discord server!')
     )
+@client.event
+async def on_member__remove(member):
+    print(f'{member} has departed the server.')
 
 
 # variables representing responses 
@@ -64,6 +67,34 @@ async def on_message(message):
     if message.content.startswith('!thanks'):
         await message.channel.send(random.choice(replies))
 
-#  token that represents the bot 
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+         return
+    
+    chooser1 = None
+    chooser2 = None
+    asker1 = None
+
+    if message.content.startswith('what are the odds?'):
+        await message.channel.send("Enter a number you would like to play out of.... (1 out of....)")
+        chooser1 = input()
+        await message.channel.send('you picked 1 out of' + ' ' + chooser1)
+        await message.channel.send('Asker: enter a number')
+        asker1 = input()
+        await message.channel.send('Chooser: enter a number')
+        chooser2 = input()
+    
+    if chooser2 == asker1:
+        await message.channel.send('You both picked ' + str(chooser2) + '!!!!')
+
+        
+
+
+
+
+
+
+# #  token that represents the bot 
 
 client.run('ODA1NTA1MDc5MzYwMjI1Mjgw.YBb3EA.ejTyLVg6iGI2uNsySxP1XuZ7cWQ')
