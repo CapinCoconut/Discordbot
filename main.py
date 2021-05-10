@@ -2,6 +2,10 @@
 import discord
 import os
 import random
+import time
+
+from discord import message
+from discord.ext import commands 
 
 client = discord.Client()
 
@@ -13,10 +17,11 @@ async def on_ready():
 
 @client.event
 async def on_member_join(member):
-    await member.create_dm()
-    await member.dm_channel.send(
-        print (f'Hi {member.name}, welcome to my Discord server!')
-    )
+    
+    for channel in member.server.channels:
+        if str(channel) == "general":
+            await client.send_message(f'welcome to the server' + {member.mention})
+
 @client.event
 async def on_member__remove(member):
     print(f'{member} has departed the server.')
@@ -72,21 +77,21 @@ async def on_message(message):
     if message.author == client.user:
          return
     
-    chooser1 = None
-    chooser2 = None
-    asker1 = None
-
+    myvar = None
+    
     if message.content.startswith('what are the odds?'):
         await message.channel.send("Enter a number you would like to play out of.... (1 out of....)")
-        chooser1 = input()
-        await message.channel.send('you picked 1 out of' + ' ' + chooser1)
-        await message.channel.send('Asker: enter a number')
-        asker1 = input()
-        await message.channel.send('Chooser: enter a number')
-        chooser2 = input()
-    
-    if chooser2 == asker1:
-        await message.channel.send('You both picked ' + str(chooser2) + '!!!!')
+        response = client.wait_for(ctx.message, timeout=10)
+        await message.channel.send('you picked 1 out of' + ' ' + (myvar))
+        time.sleep(2)
+        await message.channel.send('Pick a number in 3')
+        time.sleep(5)
+        await message.channel.send('Pick a number in 2')
+        time.sleep(5)
+        await message.channel.send('Pick a number in 1')
+        time.sleep(3)
+        await message.channel.send('Pick a number Now!')
+
 
         
 
