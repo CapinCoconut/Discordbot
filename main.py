@@ -76,29 +76,21 @@ async def on_message(message):
 async def on_message(message):
     if message.author == client.user:
          return
-    
-    myvar = None
-    
+
     if message.content.startswith('what are the odds?'):
-        await message.channel.send("Enter a number you would like to play out of.... (1 out of....)")
-        response = client.wait_for(ctx.message, timeout=10)
-        await message.channel.send('you picked 1 out of' + ' ' + (myvar))
-        time.sleep(2)
-        await message.channel.send('Pick a number in 3')
+        await message.channel.send("Congratulations! You have started 'What Are the Odds! Follow the next steps. There is No going back now!")
+        time.sleep(4)
+        await message.channel.send('Think of a number between 1 and 10')
         time.sleep(5)
-        await message.channel.send('Pick a number in 2')
+        await message.channel.send('Type that number in 3')
         time.sleep(5)
-        await message.channel.send('Pick a number in 1')
+        await message.channel.send('2')
+        time.sleep(5)
+        await message.channel.send('1')
         time.sleep(3)
-        await message.channel.send('Pick a number Now!')
-
-
-        
-
-
-
-
-
+        await message.channel.send('Now')
+        time.sleep(1)
+        await message.channel.send(random.randint(1,10))
 
 # #  token that represents the bot 
 
