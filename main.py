@@ -3,9 +3,8 @@ import discord
 import os
 import random
 import time
+from discord.ext import commands
 
-from discord import message
-from discord.ext import commands 
 
 client = discord.Client()
 
@@ -13,7 +12,6 @@ client = discord.Client()
 @client.event
 async def on_ready():
     print(f'{client.user.name} has connected to Discord!')
-
 
 @client.event
 async def on_member_join(member):
@@ -58,9 +56,6 @@ replies = [
 
 @client.event
 async def on_message(message):
-    if message.author == client.user:
-        return
-
     if message.content.startswith('Hey Apology bot'):
         await message.channel.send('Do you need an apology?')
     
@@ -71,12 +66,7 @@ async def on_message(message):
     
     if message.content.startswith('!thanks'):
         await message.channel.send(random.choice(replies))
-
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-         return
-
+    
     if message.content.startswith('what are the odds?'):
         await message.channel.send("Congratulations! You have started 'What Are the Odds! Follow the next steps. There is No going back now!")
         time.sleep(4)
@@ -92,6 +82,6 @@ async def on_message(message):
         time.sleep(1)
         await message.channel.send(random.randint(1,10))
 
-# #  token that represents the bot 
+#  token that represents the bot 
 
 client.run('ODA1NTA1MDc5MzYwMjI1Mjgw.YBb3EA.ejTyLVg6iGI2uNsySxP1XuZ7cWQ')
