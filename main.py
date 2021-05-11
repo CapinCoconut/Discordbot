@@ -5,9 +5,29 @@ import random
 import time
 from discord.ext import commands
 
+client = commands.Bot(command_prefix='--')
 
-client = discord.Client()
+@client.command(name='version')
+async def version(context):
+    general_channel = client.get_channel(805505983161827372)
+        
+    myEmbed = discord.Embed(title='SRB Current Version', description='SRB Version 1.1', color=0xFF0000)
+    myEmbed.add_field(name='Version:', value='1.0.1', inline=False)
+    myEmbed.add_field(name='Date Premiered', value='May 12, 2021', inline=False)
+    myEmbed.set_author(name='Shawn Humphries')
+    myEmbed.set_footer(text='This bot does some of random things, I have no idea what I am doing...but I am having fun')
+    myEmbed.set_image(url='https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/4676fd82ca5fa1c.png')
+    await context.message.channel.send(embed=myEmbed)
 
+#shows how many users are in the discord channel (including the bot)
+@client.command(aliases=["mc"])
+
+async def member_count(ctx):
+
+    a=ctx.guild.member_count
+    b=discord.Embed(title=f"members in {ctx.guild.name}",description=a,color=discord.Color((0xFF)))
+    await ctx.send(embed=b)
+    
 # let's us know the bot is ready to use
 @client.event
 async def on_ready():
@@ -25,7 +45,7 @@ async def on_member_join(member):
 @client.event
 async def on_ready():
     general_channel = client.get_channel(805505983161827372)
-    await general_channel.send('SRB has arrived!')
+    await general_channel.send("SRB (Shawn's Random Bot) has arrived!")
 
 
 # variables representing responses 
@@ -62,32 +82,22 @@ maybe = [
     'Venmo me $5 and I will give you an apology'
 ]
 
-# random on_message events
 
+# random on_message events
 @client.event
 async def on_message(message):
 
-    if message.content.startswith('!help'):
-         general_channel = client.get_channel(805505983161827372)
-         myEmbed = discord.Embed(title='SRB Current Version', description='SRB Version 1.1', color=0xFF0000)
-         myEmbed.add_field(name='Version:', value='1.1', inline=False)
-         myEmbed.add_field(name='Date Premiered', value='May 12, 2021', inline=False)
-         myEmbed.set_author(name='Shawn Humphries')
-         myEmbed.set_footer(text='This bot does a lot of random things, I have no idea what I am doing...but I am having fun')
-
-         await general_channel.send(embed=myEmbed)
-
     if message.content.startswith('Hey SRB'):
         await message.channel.send('Do you need an apology?')
-    if message.content.startswith('!yes'):
+    if message.content.startswith('--yes'):
         await message.channel.send(random.choice(apologies))
         time.sleep(3)
         await message.channel.send('Would you like another apology?')
-    if  message.content.startswith('!no'):
+    if  message.content.startswith('--no'):
         await message.channel.send(random.choice(denials))
-    if message.content.startswith('!thanks'):
+    if message.content.startswith('--thanks'):
         await message.channel.send(random.choice(replies))
-    if message.content.startswith('!maybe'):
+    if message.content.startswith('--maybe'):
         await message.channel.send(random.choice(maybe))
     
     # message to play "what are the odds"
@@ -106,6 +116,8 @@ async def on_message(message):
         await message.channel.send('Now')
         time.sleep(1)
         await message.channel.send(random.randint(1,10))
+
+    await client.process_commands(message)
 
 #  token that represents the bot 
 
