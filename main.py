@@ -17,11 +17,11 @@ async def version(context):
     myEmbed.set_author(name='Shawn Humphries')
     myEmbed.set_footer(text='This bot does some of random things, I have no idea what I am doing...but I am having fun')
     myEmbed.set_image(url='https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/4676fd82ca5fa1c.png')
+    myEmbed.set_thumbnail(url='https://i.imgflip.com/4a84il.png')
     await context.message.channel.send(embed=myEmbed)
 
 #shows how many users are in the discord channel (including the bot)
 @client.command(aliases=["mc"])
-
 async def member_count(ctx):
 
     a=ctx.guild.member_count
@@ -32,21 +32,8 @@ async def member_count(ctx):
 @client.event
 async def on_ready():
     print(f'{client.user.name} has connected to Discord!')
-
-# sends a message to new user in discord channel
-@client.event
-async def on_member_join(member):
-    
-    for channel in member.server.channels:
-        if str(channel) == "general":
-            await client.send_message(f'welcome to the server' + {member.mention})
-
-#Let's the server know SRB is ready to use
-@client.event
-async def on_ready():
     general_channel = client.get_channel(805505983161827372)
     await general_channel.send("SRB (Shawn's Random Bot) has arrived!")
-
 
 # variables representing responses 
 apologies = [
@@ -117,6 +104,10 @@ async def on_message(message):
         time.sleep(1)
         await message.channel.send(random.randint(1,10))
 
+#sends a message to new user in discord channel
+# async def on_member_join(member):
+#     await message.channel.send(f"{member.mention}'Welcome to the Test server, we do just test myself for now!'")
+    
     await client.process_commands(message)
 
 #  token that represents the bot 
