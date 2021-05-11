@@ -1,12 +1,12 @@
 # imports 
 import discord
-import os
 import random
 import time
 from discord.ext import commands
 
 client = commands.Bot(command_prefix='--')
 
+#shows user what version SRB is in an embeded message
 @client.command(name='version')
 async def version(context):
     general_channel = client.get_channel(805505983161827372)
@@ -14,6 +14,7 @@ async def version(context):
     myEmbed = discord.Embed(title='SRB Current Version', description='SRB Version 1.1', color=0xFF0000)
     myEmbed.add_field(name='Version:', value='1.0.1', inline=False)
     myEmbed.add_field(name='Date Premiered', value='May 12, 2021', inline=False)
+    myEmbed.add_field(name="instrcutions",value= "To interact with SRB type 'what are the odds?','hey SRB','what game should we play SRB?' respond with (--yes, --no,--maybe, --thanks)", inline=False)
     myEmbed.set_author(name='Shawn Humphries')
     myEmbed.set_footer(text='This bot does some of random things, I have no idea what I am doing...but I am having fun')
     myEmbed.set_image(url='https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/4676fd82ca5fa1c.png')
@@ -69,12 +70,21 @@ maybe = [
     'Venmo me $5 and I will give you an apology'
 ]
 
+games = [
+    'Apex',
+    'League',
+    'Siege',
+    'COD',
+    'Risk of Rain 2',
+    'You should not play games right now...GO STUDY!!!',
+]
 
 # random on_message events
+
 @client.event
 async def on_message(message):
 
-    if message.content.startswith('Hey SRB'):
+    if message.content.startswith('hey SRB'):
         await message.channel.send('Do you need an apology?')
     if message.content.startswith('--yes'):
         await message.channel.send(random.choice(apologies))
@@ -90,7 +100,7 @@ async def on_message(message):
     # message to play "what are the odds"
 
     if message.content.startswith('what are the odds?'):
-        await message.channel.send("Congratulations! You have started 'What Are the Odds! Follow the next steps. There is No going back now!")
+        await message.channel.send("Congratulations! You have started 'What Are the Odds! Follow the next steps. There is no going back now!")
         time.sleep(4)
         await message.channel.send('Think of a number between 1 and 10')
         time.sleep(5)
@@ -103,6 +113,11 @@ async def on_message(message):
         await message.channel.send('Now')
         time.sleep(1)
         await message.channel.send(random.randint(1,10))
+    
+    # pick a game for us
+    
+    if message.content.startswith('what game should we play SRB?'):
+        await message.channel.send(random.choice(games))
 
 #sends a message to new user in discord channel
 # async def on_member_join(member):

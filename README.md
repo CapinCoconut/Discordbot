@@ -1,2 +1,2 @@
 # final-smh266
-# pip install giphy_client
+# pip install -U discord.py
