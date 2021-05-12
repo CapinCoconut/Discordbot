@@ -1,4 +1,5 @@
 # imports 
+from asyncio.windows_events import PipeServer
 import discord
 import random
 import time
@@ -128,3 +129,9 @@ async def on_message(message):
 #  token that represents the bot 
 
 client.run('ODA1NTA1MDc5MzYwMjI1Mjgw.YBb3EA.ejTyLVg6iGI2uNsySxP1XuZ7cWQ')
+
+# Things I will add
+    # - message sent when a user is kicked/banned from the server
+    # - add user input to change paramters in 'what are the odds game'
+    # - add a database maybe to collect data within the server (brother said he didnt want me to collect data on him without him knowing, Challenege accepted!)
+    # - bot responding with gifs, emojiis, pictures
