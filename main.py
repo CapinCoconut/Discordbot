@@ -11,7 +11,7 @@ client = commands.Bot(command_prefix='--')
 async def on_ready():
     print(f'{client.user.name} has connected to Discord!')
     general_channel = client.get_channel(805505983161827372)
-    await general_channel.send("SRB (Shawn's Random Bot) has arrived!")
+    await general_channel.send("SRB (Shawn's Random Bot) is here and ready to serve!")
 
 #shows user what version SRB is in an embeded message
 @client.command(name='version')
@@ -21,9 +21,9 @@ async def version(context):
     myEmbed = discord.Embed(title='SRB Current Version', description='SRB Version 1.0.1', color=0xFF0000)
     myEmbed.add_field(name='Version:', value='1.0.1', inline=False)
     myEmbed.add_field(name='Date Premiered', value='May 12, 2021', inline=False)
-    myEmbed.add_field(name="instrcutions",value= "To interact with SRB type 'what are the odds?','hey SRB','what game should we play SRB?' respond with (--yes, --no,--maybe, --thanks)", inline=False)
+    myEmbed.add_field(name="instrcutions",value= "To interact with SRB type 'what are the odds?','--mc''hey SRB','what game should we play SRB?' respond with (--yes, --no,--maybe, --thanks)", inline=False)
     myEmbed.set_author(name='Shawn Humphries')
-    myEmbed.set_footer(text='This bot does some of random things, I have no idea what I am doing...but I am having fun')
+    myEmbed.set_footer(text='This bot does some random things, I have no idea what I am doing...but I am having fun')
     myEmbed.set_image(url='https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/4676fd82ca5fa1c.png')
     myEmbed.set_thumbnail(url='https://i.imgflip.com/4a84il.png')
     await context.message.channel.send(embed=myEmbed)
@@ -103,7 +103,7 @@ async def on_message(message):
     # message to play "what are the odds"
 
     if message.content.startswith('what are the odds?'):
-        await message.channel.send("Congratulations! You have started 'What Are the Odds! Follow the next steps please.")
+        await message.channel.send("Congratulations! You have started 'What Are the Odds!' Follow the next steps please.")
         time.sleep(4)
         await message.channel.send('Think of a number between 1 and 10')
         time.sleep(5)
