@@ -1,5 +1,4 @@
 # imports 
-from asyncio.windows_events import PipeServer
 import discord
 import random
 import time
@@ -7,12 +6,19 @@ from discord.ext import commands
 
 client = commands.Bot(command_prefix='--')
 
+# let's us know the bot is ready to use
+@client.event
+async def on_ready():
+    print(f'{client.user.name} has connected to Discord!')
+    general_channel = client.get_channel(805505983161827372)
+    await general_channel.send("SRB (Shawn's Random Bot) has arrived!")
+
 #shows user what version SRB is in an embeded message
 @client.command(name='version')
 async def version(context):
     general_channel = client.get_channel(805505983161827372)
         
-    myEmbed = discord.Embed(title='SRB Current Version', description='SRB Version 1.1', color=0xFF0000)
+    myEmbed = discord.Embed(title='SRB Current Version', description='SRB Version 1.0.1', color=0xFF0000)
     myEmbed.add_field(name='Version:', value='1.0.1', inline=False)
     myEmbed.add_field(name='Date Premiered', value='May 12, 2021', inline=False)
     myEmbed.add_field(name="instrcutions",value= "To interact with SRB type 'what are the odds?','hey SRB','what game should we play SRB?' respond with (--yes, --no,--maybe, --thanks)", inline=False)
@@ -30,13 +36,6 @@ async def member_count(ctx):
     b=discord.Embed(title=f"members in {ctx.guild.name}",description=a,color=discord.Color((0xFF)))
     await ctx.send(embed=b)
     
-# let's us know the bot is ready to use
-@client.event
-async def on_ready():
-    print(f'{client.user.name} has connected to Discord!')
-    general_channel = client.get_channel(805505983161827372)
-    await general_channel.send("SRB (Shawn's Random Bot) has arrived!")
-
 # variables representing responses 
 apologies = [
     'I am sorry', 
@@ -78,6 +77,9 @@ games = [
     'COD',
     'Risk of Rain 2',
     'You should not play games right now...GO STUDY!!!',
+    'Do 50 pushups then play whatever Matt wants',
+    'Do 50 pushups then play whatever Shawn wants',
+    'Do 50 pushups then play whatever Mitch wants'
 ]
 
 # random on_message events
@@ -101,7 +103,7 @@ async def on_message(message):
     # message to play "what are the odds"
 
     if message.content.startswith('what are the odds?'):
-        await message.channel.send("Congratulations! You have started 'What Are the Odds! Follow the next steps. There is no going back now!")
+        await message.channel.send("Congratulations! You have started 'What Are the Odds! Follow the next steps please.")
         time.sleep(4)
         await message.channel.send('Think of a number between 1 and 10')
         time.sleep(5)
@@ -135,3 +137,6 @@ client.run('ODA1NTA1MDc5MzYwMjI1Mjgw.YBb3EA.ejTyLVg6iGI2uNsySxP1XuZ7cWQ')
     # - add user input to change paramters in 'what are the odds game'
     # - add a database maybe to collect data within the server (brother said he didnt want me to collect data on him without him knowing, Challenege accepted!)
     # - bot responding with gifs, emojiis, pictures
+    # - tagging people for 'what are the odds' game
+    # - make it so it is constantly running on the server 
+
